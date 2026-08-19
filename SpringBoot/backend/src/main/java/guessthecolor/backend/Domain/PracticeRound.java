@@ -23,7 +23,6 @@ public class PracticeRound {
     @ManyToOne
     private Practice practice;
 
-    private long practiceId;
     private int roundIndex;
     private int targetH;
     private int targetS;
@@ -31,6 +30,6 @@ public class PracticeRound {
     private int guessH;
     private int guessS;
     private int guessB;
-    private int deltaE;
+    private double deltaE;
 
 }

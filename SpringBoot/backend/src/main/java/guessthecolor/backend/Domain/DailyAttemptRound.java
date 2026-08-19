@@ -22,7 +22,6 @@ public class DailyAttemptRound {
     @ManyToOne
     private DailyPuzzleAttempt dailyPuzzleAttempt;
 
-    private long dailyPuzzleAttemptId;
     private int roundIndex;
     private int targetH;
     private int targetS;
@@ -30,6 +29,6 @@ public class DailyAttemptRound {
     private int guessH;
     private int guessS;
     private int guessB;
-    private int deltaE;
+    private double deltaE;
     
 }
