@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,12 +29,12 @@ public class User {
     private String mail;
     private Date createdAt;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="user")
     private List<Practice> practices;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="user")
     private List<DailyPuzzleAttempt> dailyPuzzleAttempts;
 
-    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy="user")
     private Stats stats;
 }

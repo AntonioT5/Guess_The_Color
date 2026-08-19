@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,6 +25,6 @@ public class DailyPuzzle {
     private Date puzzleDate;
     private String seed;
 
-    @OneToMany(mappedBy="dailyPuzzle", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="dailyPuzzle")
     private List<DailyPuzzleAttempt> dailyPuzzleAttempts;
 }
