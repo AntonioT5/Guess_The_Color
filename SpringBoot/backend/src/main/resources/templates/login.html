@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Color</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f6f8;
+      color: #333333;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .mainAngle {
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 380px;
+      padding: 30px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .buttonAria {
+      display: flex;
+      background-color: #f1f3f5;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 30px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background-color: #ffffff;
+      color: #0d6efd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .tab-btn.inactive {
+      background-color: transparent;
+      color: #6c757d;
+    }
+
+    .tab-btn.inactive:hover {
+      color: #333333;
+    }
+
+    .inputAria {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    input {
+      background-color: #ffffff;
+      border: 1px solid #ced4da;
+      border-radius: 12px;
+      color: #333333;
+      height: 50px;
+      padding: 0 15px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input::placeholder {
+      color: #adb5bd;
+    }
+
+    input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 50px;
+      background-color: #0d6efd;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0b5ed7;
+    }
+
+    .footer-text {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 25px;
+      color: #6c757d;
+    }
+
+    .footer-text a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="header">
+    <h1>Guess the Color</h1>
+  </div>
+
+  <div class="mainAngle">
+    <div class="buttonAria">
+      <button class="tab-btn active">Sign In</button>
+      <button class="tab-btn inactive">Register</button>
+    </div>
+
+    <div class="inputAria">
+      <input placeholder="Username" type="text">
+      <input placeholder="Password" type="password">
+    </div>
+
+    <button class="submit-btn">
+      Sign In
+    </button>
+
+    <div class="footer-text">
+      New here? <a href="#">Create an account</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,6 +1,5 @@
 package guessthecolor.backend.Service.Impl;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class PracticeServiceImpl implements PracticeService {
     public Practice startSession(User user) {
         Practice practice = new Practice();
         practice.setUser(user);
-        practice.setSeed(LocalDate.now().toEpochDay());
+        practice.setSeed(new java.util.Random().nextLong());
         practice.setTotalScore(0);
         practice.setCreatedAt(new Date());
         return practiceRepository.save(practice);

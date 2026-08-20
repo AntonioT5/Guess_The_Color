@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Color - Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f4f6f8;
+            color: #333333;
+        }
+
+        .page-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            padding: 24px;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5%;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-details h2 {
+            margin: 0 0 4px 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .user-details p {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            border: 1px solid #ced4da;
+            background-color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #495057;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+            color: #212529;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .stats-grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-card {
+            display: flex;
+            flex:1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 30px 20px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+        }
+
+        .dash-yellow { color: #ffc107; }
+        .dash-blue { color: #0d6efd; }
+
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .section-title {
+            margin: 15px 0 0 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .modes-grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mode-card {
+            display: flex;
+            flex:1;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .mode-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1a1a1a;
+        }
+
+        .mode-desc {
+            font-size: 14px;
+            padding: 5px 10px;
+            color: #6c757d;
+            margin: 0 0 24px 0;
+        }
+
+        .mode-link {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .link-purple { color: #7b42f6; }
+        .link-pink { color: #e14398; }
+
+        .mode-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="dashboard-container">
+
+        <div class="card profile-section">
+            <div class="profile-info">
+                <div class="user-details">
+                    <h2>Antonio</h2>
+                    <p>@antonio_colors</p>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn">Edit Profile</button>
+                <button class="btn">Sign out</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="card stat-card">
+                <div class="stat-value dash-yellow">0</div>
+                <div class="stat-label">Best Score</div>
+            </div>
+            <div class="card stat-card">
+                <div class="stat-value dash-blue">0</div>
+                <div class="stat-label">Avg Score</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Choose your mode</h2>
+        <div class="modes-grid">
+
+            <div class="card mode-card">
+                <h3 class="mode-title">Practice</h3>
+                <p class="mode-desc">5 rounds - 3s memory - RGB sliders</p>
+                <a href="#" class="mode-link link-purple">Play now</a>
+            </div>
+
+            <div class="card mode-card">
+                <h3 class="mode-title">Daily Puzzle</h3>
+                <p class="mode-desc">One shot - Compete globally</p>
+                <a href="#" class="mode-link link-pink">Play today's</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

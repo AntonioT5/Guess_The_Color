@@ -50,11 +50,11 @@ public class ColorServiceImpl implements ColorService {
         double rl = pivotRgb(r / 255.0);
         double gl = pivotRgb(g / 255.0);
         double bl = pivotRgb(b / 255.0);
-
+        
+        //converts RGB into an intermediate space XYZ (a scientific "how much of each type of light" measurement)
         double x = rl * 0.4124 + gl * 0.3576 + bl * 0.1805;
         double y = rl * 0.2126 + gl * 0.7152 + bl * 0.0722;
         double z = rl * 0.0193 + gl * 0.1192 + bl * 0.9505;
-
         x /= 0.95047;
         y /= 1.00000;
         z /= 1.08883;
@@ -69,14 +69,16 @@ public class ColorServiceImpl implements ColorService {
         return new double[]{L, A, B};
     }
 
-    private double pivotRgb(double n) {
-        return n > 0.04045 ? Math.pow((n + 0.055) / 1.055, 2.4) : n / 12.92;
+    private double pivotRgb(double n) { 
+        return n > 0.04045 ? Math.pow((n + 0.055) / 1.055, 2.4) : n / 12.92; // sRGB→Lab converter formula
     }
 
     private double pivotXyz(double n) {
-        return n > 0.008856 ? Math.cbrt(n) : (7.787 * n) + (16.0 / 116.0);
+        return n > 0.008856 ? Math.cbrt(n) : (7.787 * n) + (16.0 / 116.0); //XYZ into the final L, A, B numbers, where L = lightness, A = green↔red axis, B = blue↔yellow axis
     }
 
+    //industry standard, published by color scientists
+    //two Lab colors in → one number out, where bigger = more visually different.
     private double ciede2000(double[] lab1, double[] lab2){
         double L1 = lab1[0], a1 = lab1[1], b1 = lab1[2];
         double L2 = lab2[0], a2 = lab2[1], b2 = lab2[2];
