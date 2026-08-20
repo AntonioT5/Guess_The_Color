@@ -5,6 +5,6 @@ import java.util.Optional;
 import guessthecolor.backend.Domain.User;
 
 public interface UserService {
-    User register(String username, String password, String repeatPassword, String name, String surname);
+    User register(String username, String password, String repeatPassword, String surname);
     Optional<User> findByUsername(String username);
 }
