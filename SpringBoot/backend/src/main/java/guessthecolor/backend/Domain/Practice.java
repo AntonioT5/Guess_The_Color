@@ -23,8 +23,8 @@ public class Practice {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    private String seed;
-    private int totalScore;
+    private long seed;
+    private double totalScore;
     private Date createdAt;
 
     @OneToMany(mappedBy="practice")

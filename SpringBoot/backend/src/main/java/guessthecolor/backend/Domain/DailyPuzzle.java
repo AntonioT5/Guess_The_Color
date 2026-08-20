@@ -23,7 +23,7 @@ public class DailyPuzzle {
     private Long id;
     
     private Date puzzleDate;
-    private String seed;
+    private long seed;
 
     @OneToMany(mappedBy="dailyPuzzle")
     private List<DailyPuzzleAttempt> dailyPuzzleAttempts;

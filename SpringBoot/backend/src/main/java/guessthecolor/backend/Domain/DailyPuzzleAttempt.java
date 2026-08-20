@@ -27,7 +27,7 @@ public class DailyPuzzleAttempt {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    private int totalScore;
+    private double totalScore;
     private Date completedAt;
 
     @ManyToOne

@@ -31,5 +31,5 @@ public class PracticeRound {
     private int guessS;
     private int guessB;
     private double deltaE;
-
+    private double score;
 }

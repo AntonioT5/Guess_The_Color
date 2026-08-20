@@ -30,5 +30,5 @@ public class DailyAttemptRound {
     private int guessS;
     private int guessB;
     private double deltaE;
-    
+    private double score;
 }

@@ -10,7 +10,7 @@ import guessthecolor.backend.Domain.User;
 
 public interface DailyPuzzleAttemptService {
     
-    DailyPuzzleAttempt startAttempt(User user);
+    DailyPuzzleAttempt startAttempt(User user, DailyPuzzle puzzle);
     DailyAttemptRound submitRound(DailyPuzzleAttempt attempt, int roundIndex, Color guess);
     DailyPuzzleAttempt completeAttempt(DailyPuzzleAttempt attempt);
     
