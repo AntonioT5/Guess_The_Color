@@ -127,36 +127,47 @@
     .submit-btn:hover {
       background-color: #0b5ed7;
     }
+
+    .error-alert {
+      color: #e11d48;
+      padding: 12px 15px;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
   </style>
 </head>
 <body>
 <div class="page-wrapper">
 
   <div class="back">
-    <a href="">Go Back</a>
+    <a href="/home">Go Back</a>
   </div>
 
   <div class="header">
     <h1>Edit Profile</h1>
-    <p>Update your display info</p>
+    <p>Update your personal info</p>
   </div>
 
   <div class="edit-card">
     
-    <form th:action="/edit" action="post">
+    <form th:action="@{/edit}" method="post">
       <div class="input-group">
         <label>Display Username</label>
-        <input type="text" name="username" value="${username}">
+        <input type="text" name="username" th:value="${username}">
       </div>
-
+      <input type="hidden" name="oldUsername" th:value="${username}">
+      <input type="hidden" name="oldMail" th:value="${mail}">
       <div class="input-group">
         <label>Mail</label>
-        <input type="text" name="mail" value="${mail}">
+        <input type="text" name="mail" th:value="${mail}">
       </div>
-
       <button class="submit-btn">Save Changes</button>
     </form>
-    <div th:if="${error!=null}" th:text="${error}"></div>
+
+    <div class="error-alert" th:if="${error!=null}" th:text="${error}"></div>
   </div>
 </div>
 </body>

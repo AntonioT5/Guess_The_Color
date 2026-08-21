@@ -1,6 +1,10 @@
 package guessthecolor.backend.Web.Controllers;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +32,32 @@ public class EditController {
     }
 
     @PostMapping()
-    public String editProfileData(@RequestParam String oldUsername, @RequestParam String username, @RequestParam String mail,
-        Model model
+    public String editProfileData(@RequestParam String oldUsername,
+                                @RequestParam String oldMail,
+                                @RequestParam String username, 
+                                @RequestParam String mail,
+                                @AuthenticationPrincipal User currentUser,
+                                Model model
     ) {
         try {
-            userService.editData(oldUsername, username, mail);
+            userService.editData(oldUsername, oldMail, username, mail);
+
+            UserDetails updatedUser = userService.loadUserByMail(mail);
+
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                updatedUser, 
+                updatedUser.getPassword(), 
+                updatedUser.getAuthorities()
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
+            
             return "redirect:/home";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "redirect:/editProfile";
+            model.addAttribute("username", oldUsername);
+            model.addAttribute("mail", oldMail);
+            return "editProfile";
         }
 
     }

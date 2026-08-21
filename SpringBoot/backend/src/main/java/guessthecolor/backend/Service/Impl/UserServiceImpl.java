@@ -66,11 +66,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editData(String oldUsername, String username, String mail) {
-        User user = userRepository.findByUsername(oldUsername).orElseThrow(()->new UserNotFoundException(mail));
+    public User editData(String oldUsername, String oldMail, String username, String mail) {
+        User user = userRepository.findByMail(oldMail).orElseThrow(()->new UserNotFoundException(oldMail));
 
         user.setUsername(username);
-        if(userRepository.findByMail(mail) != null){
+        if(userRepository.findByMail(mail).isPresent() && !oldMail.equals(mail)){
             throw new UserAlreadyExistsException(mail);
         }
 

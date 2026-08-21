@@ -13,5 +13,5 @@ public interface UserService {
 
     public UserDetails loadUserByMail(String mail);
 
-    User editData(String oldUsername, String username, String mail);
+    User editData(String oldUsername, String oldMail, String username, String mail);
 }

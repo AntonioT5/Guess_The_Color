@@ -189,7 +189,9 @@
             </div>
             <div class="action-buttons">
                 <a class="btn" href="/edit" style="text-decoration:none;text-align:center;">Edit Profile</a>
-                <a class="btn" href="/logout" style="text-decoration:none;text-align:center;">Sign out</a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn">Sign Out</button>
+                </form>
             </div>
         </div>
 
