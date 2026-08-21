@@ -152,22 +152,26 @@
 
   <div class="mainAngle">
     <div class="buttonAria">
-      <button class="tab-btn active">Sign In</button>
-      <button class="tab-btn inactive">Register</button>
+      <a class="tab-btn active" style="text-decoration:none;text-align:center;">Sign In</a>
+      <a class="tab-btn inactive" href="/register" style="text-decoration:none;text-align:center;">Register</a>
     </div>
 
-    <div class="inputAria">
-      <input placeholder="Username" type="text">
-      <input placeholder="Password" type="password">
-    </div>
+    <form th:action="@{/login}" method="post">
+      <div class="inputAria">
+        <input placeholder="Username" name="username" type="text">
+        <input placeholder="Password" name="password" type="password">
+      </div>
 
-    <button class="submit-btn">
-      Sign In
-    </button>
+      <button class="submit-btn" type="submit">
+        Sign In
+      </button>
+    </form>
 
     <div class="footer-text">
-      New here? <a href="#">Create an account</a>
+      New here? <a href="/register">Create an account</a>
     </div>
+
+    <div th:if="${param.error}" th:text="${param.error}"></div>
   </div>
 
 </div>

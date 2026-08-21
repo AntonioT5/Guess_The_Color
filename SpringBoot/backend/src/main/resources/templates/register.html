@@ -151,24 +151,28 @@
 
     <div class="mainAngle">
         <div class="buttonAria">
-            <button class="tab-btn inactive">Sign In</button>
-            <button class="tab-btn active">Register</button>
+            <a class="tab-btn inactive" href="/login" style="text-decoration:none;text-align:center;">Sign In</a>
+            <a class="tab-btn active" style="text-decoration:none;text-align:center;">Register</a>
         </div>
 
-        <div class="inputAria">
-            <input placeholder="Name" type="text">
-            <input placeholder="Username" type="password">
-            <input placeholder="Password" type="password">
-            <input placeholder="Repeat Password" type="password">
-        </div>
+        <form th:action="@{/register}" method="post">
+            <div class="inputAria">
+                <input placeholder="Username" name="username" type="text">
+                <input placeholder="Mail" name="mail" type="password">
+                <input placeholder="Password" name="password" type="password">
+                <input placeholder="Repeat Password" name="repeatPassword" type="password">
+            </div>
 
-        <button class="submit-btn">
-            Create Account
-        </button>
+            <button class="submit-btn" type="submit">
+                Create Account
+            </button>
+        </form>
 
         <div class="footer-text">
-            Already have an account? <a href="#">Sign in instead</a>
+            Already have an account? <a href="/login">Sign in instead</a>
         </div>
+
+        <div th:if="${error != null}" th:text="${error}"></div>
     </div>
 
 </div>

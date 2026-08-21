@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
             )
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/", "/login").permitAll()
+                .requestMatchers("/", "/login", "/register").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
