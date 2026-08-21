@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import guessthecolor.backend.Domain.Enums.Role;
 import guessthecolor.backend.Service.Impl.InvalidArgumentsException;
 import guessthecolor.backend.Service.UserService;
 import lombok.AllArgsConstructor;
@@ -30,11 +29,10 @@ public class RegisterController {
                            @RequestParam String username,
                            @RequestParam String password,
                            @RequestParam String repeatPassword,
-                           @RequestParam Role role,
                            Model model) throws InvalidArgumentsException {
 
         try {
-            this.userService.register(username, password, repeatPassword, mail, new Date(), role);
+            this.userService.register(username, password, repeatPassword, mail, new Date());
             return "redirect:/login";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());

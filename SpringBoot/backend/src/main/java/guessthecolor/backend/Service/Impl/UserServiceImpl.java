@@ -8,9 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import guessthecolor.backend.Domain.Enums.Role;
+import guessthecolor.backend.Domain.Exception.AddAllFieldsException;
 import guessthecolor.backend.Domain.Exception.PasswordsDoNotMatchException;
 import guessthecolor.backend.Domain.Exception.UserAlreadyExistsException;
 import guessthecolor.backend.Domain.Exception.UserNotFoundException;
+import guessthecolor.backend.Domain.Exception.WrongMailFormatException;
 import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Repository.UserRepository;
 import guessthecolor.backend.Service.UserService;
@@ -28,10 +30,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String username, String password, String repeatPassword, String mail, Date date, Role role) throws InvalidArgumentsException {
+    public User register(String username, String password, String repeatPassword, String mail, Date date) throws InvalidArgumentsException {
 
-        if(username == null || username.isEmpty() || password == null || password.isEmpty()){
-            throw new InvalidArgumentsException();
+        if(username == null || username.isEmpty() || password == null || password.isEmpty() || mail == null || mail.isEmpty()){
+            throw new AddAllFieldsException();
+        }
+
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        if (!mail.matches(emailRegex)) {
+            throw new WrongMailFormatException(); 
         }
 
         if(!password.equals(repeatPassword)){
@@ -42,7 +49,7 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistsException(mail);
         }
 
-        User user = new User(username, passwordEncoder.encode(password), mail, date, role);
+        User user = new User(username, passwordEncoder.encode(password), mail, date, Role.ROLE_USER);
 
         return userRepository.save(user);
     }
