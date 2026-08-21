@@ -1,5 +1,7 @@
 package guessthecolor.backend.Web.Controllers;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import guessthecolor.backend.Domain.Enums.Role;
+import guessthecolor.backend.Service.Impl.InvalidArgumentsException;
 import guessthecolor.backend.Service.UserService;
 import lombok.AllArgsConstructor;
 
@@ -18,22 +22,23 @@ public class RegisterController {
 
     @GetMapping
     public String getRegisterPage(Model model) {
-        return "register.html";
+        return "register";
     }
 
     @PostMapping
-    public String register(@RequestParam String name,
+    public String register(@RequestParam String mail,
                            @RequestParam String username,
                            @RequestParam String password,
                            @RequestParam String repeatPassword,
-                           Model model) {
+                           @RequestParam Role role,
+                           Model model) throws InvalidArgumentsException {
 
         try {
-            this.userService.register(username, password, repeatPassword, name);
+            this.userService.register(username, password, repeatPassword, mail, new Date(), role);
             return "redirect:/login";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "register.html";
+            return "register";
         }
     }
 }

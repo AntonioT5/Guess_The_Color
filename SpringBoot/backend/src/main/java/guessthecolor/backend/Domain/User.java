@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="game_user")
+@Table(name="game_user", uniqueConstraints=@UniqueConstraint(columnNames=("mail")))
 public class User implements UserDetails{
     
     @Id
@@ -34,6 +35,7 @@ public class User implements UserDetails{
     private Long id;
 
     private String username;
+    private String password;
     private String mail;
     private Date createdAt;
 
@@ -53,6 +55,14 @@ public class User implements UserDetails{
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(String username, String password, String mail, Date date, Role role) {
+        this.username = username;
+        this.password = password;
+        this.createdAt=date;
+        this.mail = mail;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
