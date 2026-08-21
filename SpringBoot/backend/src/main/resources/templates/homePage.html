@@ -183,13 +183,13 @@
         <div class="card profile-section">
             <div class="profile-info">
                 <div class="user-details">
-                    <h2>Antonio</h2>
-                    <p>@antonio_colors</p>
+                    <h2 th:text="${username}"></h2>
+                    <p>Ready to hit today's puzzle</p>
                 </div>
             </div>
             <div class="action-buttons">
-                <button class="btn">Edit Profile</button>
-                <button class="btn">Sign out</button>
+                <a class="btn" href="/edit" style="text-decoration:none;text-align:center;">Edit Profile</a>
+                <a class="btn" href="/logout" style="text-decoration:none;text-align:center;">Sign out</a>
             </div>
         </div>
 

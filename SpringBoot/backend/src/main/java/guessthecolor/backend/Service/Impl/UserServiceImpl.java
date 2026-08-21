@@ -2,6 +2,7 @@ package guessthecolor.backend.Service.Impl;
 
 import java.util.Date;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import guessthecolor.backend.Domain.Enums.Role;
 import guessthecolor.backend.Domain.Exception.PasswordsDoNotMatchException;
 import guessthecolor.backend.Domain.Exception.UserAlreadyExistsException;
 import guessthecolor.backend.Domain.Exception.UserNotFoundException;
-import guessthecolor.backend.Domain.Exception.UsernameNotFoundException;
 import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Repository.UserRepository;
 import guessthecolor.backend.Service.UserService;
@@ -53,9 +53,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
+    public UserDetails loadUserByMail(String mail) {
+        return userRepository.findByMail(mail)
+                .orElseThrow(() -> new BadCredentialsException("Invalid mail or password!"));
+    }
+
+    @Override
+    public User editData(String oldUsername, String username, String mail) {
+        User user = userRepository.findByUsername(oldUsername).orElseThrow(()->new UserNotFoundException(mail));
+
+        user.setUsername(username);
+        if(userRepository.findByMail(mail) != null){
+            throw new UserAlreadyExistsException(mail);
+        }
+
+        user.setMail(mail);
+
+        return userRepository.save(user);
     }
     
 }

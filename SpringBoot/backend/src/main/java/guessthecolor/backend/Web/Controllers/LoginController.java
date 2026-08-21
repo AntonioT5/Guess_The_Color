@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Service.AuthService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
 
@@ -26,15 +25,13 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@RequestParam String username, 
+    public String login(@RequestParam String mail, 
                         @RequestParam String password,
-                        Model model,
-                        HttpServletRequest req){
+                        Model model){
         User user;
 
         try {
-            user = this.authService.login(username, password);
-            req.getSession().setAttribute("user", user);
+            user = this.authService.login(mail, password);
             return "redirect:/home";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());

@@ -28,15 +28,14 @@ public class CustomUsernamePasswordAuthenticationProvider
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
 
-        String username = authentication.getName();
+        String mail = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (mail.isEmpty() || password.isEmpty()) {
             throw new BadCredentialsException("Empty credentials!");
         }
 
-        UserDetails userDetails =
-                this.userService.loadUserByUsername(username);
+        UserDetails userDetails =this.userService.loadUserByMail(mail);
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Password is incorrect!");

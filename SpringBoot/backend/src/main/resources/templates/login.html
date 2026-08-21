@@ -141,6 +141,15 @@
     .footer-text a:hover {
       text-decoration: underline;
     }
+
+    .error-alert {
+      color: #e11d48;
+      padding: 12px 15px;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 5px;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -158,7 +167,7 @@
 
     <form th:action="@{/login}" method="post">
       <div class="inputAria">
-        <input placeholder="Username" name="username" type="text">
+        <input placeholder="Mail" name="mail" type="text">
         <input placeholder="Password" name="password" type="password">
       </div>
 
@@ -171,7 +180,7 @@
       New here? <a href="/register">Create an account</a>
     </div>
 
-    <div th:if="${param.error}" th:text="${param.error}"></div>
+    <div class="error-alert" th:if="${param.error}">Invalid email or password.</div>
   </div>
 
 </div>

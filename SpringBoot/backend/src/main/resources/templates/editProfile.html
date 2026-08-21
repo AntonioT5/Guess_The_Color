@@ -142,18 +142,21 @@
   </div>
 
   <div class="edit-card">
+    
+    <form th:action="/edit" action="post">
+      <div class="input-group">
+        <label>Display Username</label>
+        <input type="text" name="username" value="${username}">
+      </div>
 
-    <div class="input-group">
-      <label>Display Name</label>
-      <input type="text" value="Antonio">
-    </div>
+      <div class="input-group">
+        <label>Mail</label>
+        <input type="text" name="mail" value="${mail}">
+      </div>
 
-    <div class="input-group">
-      <label>Username</label>
-      <input type="text" value="antonio_colors">
-    </div>
-
-    <button class="submit-btn">Save Changes</button>
+      <button class="submit-btn">Save Changes</button>
+    </form>
+    <div th:if="${error!=null}" th:text="${error}"></div>
   </div>
 </div>
 </body>
