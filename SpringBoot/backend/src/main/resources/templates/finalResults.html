@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Color - Final Score</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f4f6f8;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .page-wrapper {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 100px;
+            width: 100%;
+            max-width: 850px;
+            padding: 35px 25px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin: 20px;
+        }
+
+        .score-aria{
+            margin-left: 30px;
+        }
+
+        .final-score-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-number {
+            font-size: 80px;
+            font-weight: 800;
+            color: #0d6efd;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .score-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .score-subtext {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .rounds-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .round-item {
+            display: flex;
+            max-width: 100%;
+            width: 400px;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.1s ease;
+        }
+
+        .round-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .round-colors {
+            display: flex;
+            gap: 8px;
+            margin-right: 15px;
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        .round-name {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .round-score {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .submit-btn {
+            width: 200px;
+            height: 50px;
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="score-aria">
+            <div class="final-score-header">
+                <div class="score-number">78</div>
+                <div class="score-text">Great</div>
+                <div class="score-subtext">Average score across 5 rounds</div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-num">88</div>
+                    <div class="stat-label">Best Round</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">78</div>
+                    <div class="stat-label">Avg Score</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounds-list">
+            <div class="round-item">
+                <div class="round-colors">
+                    <div class="color-swatch" style="background-color: #89afca;"></div>
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+                <div class="round-name">Round 1</div>
+                <div class="round-score">80</div>
+            </div>
+
+            <div class="round-item">
+                <div class="round-colors">
+                    <div class="color-swatch" style="background-color: #aae033;"></div>
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+                <div class="round-name">Round 2</div>
+                <div class="round-score">70</div>
+            </div>
+
+            <div class="round-item">
+                <div class="round-colors">
+                    <div class="color-swatch" style="background-color: #889b25;"></div>
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+                <div class="round-name">Round 3</div>
+                <div class="round-score">79</div>
+            </div>
+
+            <div class="round-item">
+                <div class="round-colors">
+                    <div class="color-swatch" style="background-color: #59798b;"></div>
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+                <div class="round-name">Round 4</div>
+                <div class="round-score">88</div>
+            </div>
+
+            <div class="round-item">
+                <div class="round-colors">
+                    <div class="color-swatch" style="background-color: #59798b;"></div>
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                </div>
+                <div class="round-name">Round 5</div>
+                <div class="round-score">88</div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button class="submit-btn">
+            Go Back Home
+        </button>
+    </div>
+</body>
+</html>
