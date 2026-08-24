@@ -212,7 +212,9 @@
             <div class="card mode-card">
                 <h3 class="mode-title">Practice</h3>
                 <p class="mode-desc">5 rounds - 3s memory - RGB sliders</p>
-                <a href="#" class="mode-link link-purple">Play now</a>
+                <form th:action="@{/practice/start}" method="post" style="margin:0;">
+                    <button type="submit" class="mode-link link-purple" style="background:none;border:none;padding:0;cursor:pointer;font:inherit;">Play now</button>
+                </form>
             </div>
 
             <div class="card mode-card">

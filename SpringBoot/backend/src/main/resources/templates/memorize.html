@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Guess the Color</title>
@@ -90,14 +90,14 @@
 <body>
     <div class="page-wrapper">
         <div class="header">
-            <h1>Round 1 of 5</h1>
+            <h1 th:text="|Round ${roundIndex + 1} of 5|">Round 1 of 5</h1>
         </div>
 
         <div class="instruction" id="instruction-text">
             Memorize this color — you have 3s!
         </div>
 
-        <div class="color-box">
+        <div class="color-box" th:style="|background-color: rgb(${targetR}, ${targetG}, ${targetB})|">
             <div class="countdown-circle" id="countdown-number">3</div>
         </div>
 
@@ -111,6 +111,7 @@
     </div>
 
     <script>
+        let roundIndex = [[${roundIndex}]];
         let timeLeft = 3;
 
         const countdownElement = document.getElementById('countdown-number');
@@ -125,7 +126,7 @@
             } else {
                 clearInterval(timer);
                 countdownElement.textContent = "0";
-                instructionElement.textContent = "Time's up!";
+                window.location.href = '/practice/play/' + roundIndex + '/guess';
             }
         }, 1000);
     </script>

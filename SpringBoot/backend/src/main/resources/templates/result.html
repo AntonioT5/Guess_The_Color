@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Guess the Color - Result</title>
+    <title>Guess the Color</title>
 
     <style>
         body {
@@ -63,14 +63,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
 
-        .target-box {
-            background-color: #89afca;
-        }
-
-        .guess-box {
-            background-color: #808080;
-        }
-
         .box-label {
             font-size: 12px;
             font-weight: 700;
@@ -87,7 +79,7 @@
         .score-number {
             font-size: 72px;
             font-weight: 800;
-            color: #0d6efd; /* Primary blue to pop out */
+            color: #0d6efd;
             line-height: 1;
             margin-bottom: 5px;
         }
@@ -132,22 +124,22 @@
     <div class="page-wrapper">
 
         <div class="header">
-            <h1>Round 0 Result</h1>
+            <h1 th:text="|Round ${roundIndex+1} result|">Round 0 result</h1>
         </div>
 
         <div class="boxes-container">
             <div class="box-column">
-                <div class="color-box target-box"></div>
+                <div class="color-box" th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB})|"></div>
                 <div class="box-label">TARGET</div>
             </div>
             <div class="box-column">
-                <div class="color-box guess-box"></div>
+                <div class="color-box" th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB})|"></div>
                 <div class="box-label">YOUR COLOR</div>
             </div>
         </div>
 
         <div class="score-container">
-            <div class="score-number">80</div>
+            <div class="score-number" th:text="${#numbers.formatDecimal(round.score, 1, 2)}"></div>
         </div>
 
         <div class="progress-container">
@@ -157,10 +149,26 @@
             <div class="progress-segment"></div>
             <div class="progress-segment"></div>
         </div>
+        
+        <div th:if="${!isLastRound}">
+            <form th:action="@{/practice/play/{roundIndex}(roundIndex=${roundIndex + 1})}"
+                method="get"
+                style="margin:0;">
+                <button class="submit-btn">
+                    Round <span th:text="${roundIndex+1}"></span> of 5
+                </button>
+            </form>
+        </div>
 
-        <button class="submit-btn">
-            Round 1 of 5
-        </button>
+        <div th:if="${isLastRound}">
+            <form th:action="@{/practice/final}"
+                method="get"
+                style="margin:0;">
+                <button class="submit-btn">
+                    Submit your last round
+                </button>
+            </form>
+        </div>
 
     </div>
 </body>

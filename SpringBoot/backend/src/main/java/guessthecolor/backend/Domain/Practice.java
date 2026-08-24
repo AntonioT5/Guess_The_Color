@@ -1,5 +1,6 @@
 package guessthecolor.backend.Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Practice {
     private Date createdAt;
 
     @OneToMany(mappedBy="practice")
-    private List<PracticeRound> practiceRounds;
+    private List<PracticeRound> practiceRounds = new ArrayList<>();
 
     @ManyToOne
     private User user;

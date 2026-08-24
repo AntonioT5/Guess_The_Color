@@ -16,34 +16,22 @@ public class ColorServiceImpl implements ColorService {
     public List<Color> generateColors(long seed) {
         Random rng = new Random(seed);
         List<Color> colors = new ArrayList<>();
-        for (int i=0; i<5; i++){
-            int h = rng.nextInt(360);
-            int s = 40 + rng.nextInt(61);
-            int b = 40 + rng.nextInt(61);
-            colors.add(new Color(h, s, b));
+        for (int i = 0; i < 5; i++) {
+            colors.add(new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256)));
         }
         return colors;
     }
 
     @Override
     public double calculateDeltaE(Color target, Color guess) {
-        double[] targetLab = hsbToLab(target);
-        double[] guessLab = hsbToLab(guess);
-        return ciede2000(targetLab, guessLab);
+        return ciede2000(rgbToLab(target.r(), target.g(), target.b()),
+                          rgbToLab(guess.r(), guess.g(), guess.b()));
     }
 
     @Override
     public double calculateScore(double deltaE) {
         double score = 10.0 * Math.exp(-deltaE / 12.0);
         return Math.max(0, Math.min(10, score));
-    }
-
-    private double[] hsbToLab(Color c){
-        int rgbInt = java.awt.Color.HSBtoRGB(c.h() / 360f, c.s() / 100f, c.b() / 100f);
-        int r = (rgbInt >> 16) & 0xFF;
-        int g = (rgbInt >> 8) & 0xFF;
-        int bl = rgbInt & 0xFF;
-        return rgbToLab(r, g, bl);
     }
     
     private double[] rgbToLab(int r, int g, int b){

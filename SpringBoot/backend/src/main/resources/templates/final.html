@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Guess the Color - Final Score</title>
+    <title>Guess the Color</title>
 
     <style>
         body {
@@ -163,67 +163,30 @@
     <div class="page-wrapper">
         <div class="score-aria">
             <div class="final-score-header">
-                <div class="score-number">78</div>
-                <div class="score-text">Great</div>
-                <div class="score-subtext">Average score across 5 rounds</div>
+                <div class="score-number" th:text="${#numbers.formatDecimal(practice.totalScore, 1, 2)}"></div>
+                <div class="score-subtext">Average score across <span th:text="${practice.practiceRounds.size()}"></span> rounds</div>
             </div>
 
             <div class="stats-container">
                 <div class="stat-card">
-                    <div class="stat-num">88</div>
+                    <div class="stat-num" th:text="${#numbers.formatDecimal(practice.practiceRounds.stream().mapToDouble(r->r.score).max().orElse(0), 1, 2)}"></div>
                     <div class="stat-label">Best Round</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-num">78</div>
+                    <div class="stat-num" th:text="${#numbers.formatDecimal(practice.totalScore/practice.practiceRounds.size(), 1, 2)}"></div>
                     <div class="stat-label">Avg Score</div>
                 </div>
             </div>
         </div>
 
         <div class="rounds-list">
-            <div class="round-item">
+            <div class="round-item" th:each="round, i : ${practice.practiceRounds}">
                 <div class="round-colors">
-                    <div class="color-swatch" style="background-color: #89afca;"></div>
-                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-swatch" th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB})|"></div>
+                    <div class="color-swatch" th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB})|"></div>
                 </div>
-                <div class="round-name">Round 1</div>
-                <div class="round-score">80</div>
-            </div>
-
-            <div class="round-item">
-                <div class="round-colors">
-                    <div class="color-swatch" style="background-color: #aae033;"></div>
-                    <div class="color-swatch" style="background-color: #808080;"></div>
-                </div>
-                <div class="round-name">Round 2</div>
-                <div class="round-score">70</div>
-            </div>
-
-            <div class="round-item">
-                <div class="round-colors">
-                    <div class="color-swatch" style="background-color: #889b25;"></div>
-                    <div class="color-swatch" style="background-color: #808080;"></div>
-                </div>
-                <div class="round-name">Round 3</div>
-                <div class="round-score">79</div>
-            </div>
-
-            <div class="round-item">
-                <div class="round-colors">
-                    <div class="color-swatch" style="background-color: #59798b;"></div>
-                    <div class="color-swatch" style="background-color: #808080;"></div>
-                </div>
-                <div class="round-name">Round 4</div>
-                <div class="round-score">88</div>
-            </div>
-
-            <div class="round-item">
-                <div class="round-colors">
-                    <div class="color-swatch" style="background-color: #59798b;"></div>
-                    <div class="color-swatch" style="background-color: #808080;"></div>
-                </div>
-                <div class="round-name">Round 5</div>
-                <div class="round-score">88</div>
+                <div class="round-name" th:text="|Round ${i.index + 1}|"></div>
+                <div class="round-score" th:text="${#numbers.formatDecimal(round.score, 1, 2)}"></div>
             </div>
         </div>
     </div>

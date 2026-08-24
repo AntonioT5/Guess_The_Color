@@ -41,13 +41,14 @@ public class PracticeServiceImpl implements PracticeService {
         double score = colorService.calculateScore(deltaE);
 
         PracticeRound round = new PracticeRound();
+        practice.getPracticeRounds().add(round);
         round.setPractice(practice);
         round.setRoundIndex(roundIndex);
-        round.setTargetH(target.h());
-        round.setTargetS(target.s());
+        round.setTargetR(target.r());
+        round.setTargetG(target.g());
         round.setTargetB(target.b());
-        round.setGuessH(guess.h());
-        round.setGuessS(guess.s());
+        round.setGuessR(guess.r());
+        round.setGuessG(guess.g());
         round.setGuessB(guess.b());
         round.setDeltaE(deltaE);
         round.setScore(score);

@@ -23,11 +23,11 @@ public class DailyAttemptRound {
     private DailyPuzzleAttempt dailyPuzzleAttempt;
 
     private int roundIndex;
-    private int targetH;
-    private int targetS;
+    private int targetR;
+    private int targetG;
     private int targetB;
-    private int guessH;
-    private int guessS;
+    private int guessR;
+    private int guessG;
     private int guessB;
     private double deltaE;
     private double score;

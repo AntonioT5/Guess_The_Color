@@ -47,11 +47,11 @@ public class DailyPuzzleAttemptServiceImpl implements DailyPuzzleAttemptService{
         DailyAttemptRound round = new DailyAttemptRound();
         round.setDailyPuzzleAttempt(attempt);
         round.setRoundIndex(roundIndex);
-        round.setTargetH(target.h());
-        round.setTargetS(target.s());
+        round.setTargetR(target.r());
+        round.setTargetG(target.g());
         round.setTargetB(target.b());
-        round.setGuessH(guess.h());
-        round.setGuessS(guess.s());
+        round.setGuessR(guess.r());
+        round.setGuessG(guess.g());
         round.setGuessB(guess.b());
         round.setDeltaE(deltaE);
         round.setScore(score);

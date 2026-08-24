@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Guess the Color</title>
@@ -194,7 +194,7 @@
     <div class="page-wrapper">
 
         <div class="header">
-            <h1>Round 1 of 5</h1>
+            <h1 th:text="|Round ${roundIndex + 1} of 5|">Round 1 of 5</h1>
         </div>
 
         <div class="instruction">
@@ -208,35 +208,39 @@
             </div>
         </div>
 
-        <div class="sliders-container">
-            <div class="slider-group">
-                <div class="slider-header">
-                    <span class="label-r">Red</span>
-                    <span class="val-text" id="val-r">128</span>
+        <form th:action="@{/practice/rounds}" method="post">
+            <div class="sliders-container">
+                <input type="hidden" name="roundIndex" th:value="${roundIndex}">
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="label-r">Red</span>
+                        <span class="val-text" id="val-r">128</span>
+                    </div>
+                    <input name="r" type="range" id="slider-r" min="0" max="255" value="128">
                 </div>
-                <input type="range" id="slider-r" min="0" max="255" value="128">
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="label-g">Green</span>
+                        <span class="val-text" id="val-g">128</span>
+                    </div>
+                    <input name="g" type="range" id="slider-g" min="0" max="255" value="128">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="label-b">Blue</span>
+                        <span class="val-text" id="val-b">128</span>
+                    </div>
+                    <input name="b" type="range" id="slider-b" min="0" max="255" value="128">
+                </div>
             </div>
 
-            <div class="slider-group">
-                <div class="slider-header">
-                    <span class="label-g">Green</span>
-                    <span class="val-text" id="val-g">128</span>
-                </div>
-                <input type="range" id="slider-g" min="0" max="255" value="128">
-            </div>
-
-            <div class="slider-group">
-                <div class="slider-header">
-                    <span class="label-b">Blue</span>
-                    <span class="val-text" id="val-b">128</span>
-                </div>
-                <input type="range" id="slider-b" min="0" max="255" value="128">
-            </div>
-        </div>
-
-        <button class="submit-btn">
-            Submit Guess
-        </button>
+            <button class="submit-btn">
+                Submit Guess
+            </button>
+        </form>
 
         <div class="progress-container">
             <div class="progress-segment active"></div>
