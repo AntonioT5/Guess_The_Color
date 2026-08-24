@@ -114,7 +114,24 @@
         .label-r { color: #dc3545; }
         .label-g { color: #198754; }
         .label-b { color: #0d6efd; }
-        .val-text { color: #6c757d; }
+        .val-text {
+            border: none;
+            width: 25px;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"]:focus{
+            border: none;
+            outline: none;
+        }
 
         input[type=range] {
             -webkit-appearance: none;
@@ -215,7 +232,7 @@
                 <div class="slider-group">
                     <div class="slider-header">
                         <span class="label-r">Red</span>
-                        <span class="val-text" id="val-r">128</span>
+                        <input type="number" name="val-r" id="val-r" class="val-text" value="128" min="0" max="255">
                     </div>
                     <input name="r" type="range" id="slider-r" min="0" max="255" value="128">
                 </div>
@@ -223,7 +240,8 @@
                 <div class="slider-group">
                     <div class="slider-header">
                         <span class="label-g">Green</span>
-                        <span class="val-text" id="val-g">128</span>
+                        <!-- <span class="val-text" id="val-g">128</span> -->
+                        <input type="number" name="val-g" id="val-g" class="val-text" value="128" min="0" max="255">
                     </div>
                     <input name="g" type="range" id="slider-g" min="0" max="255" value="128">
                 </div>
@@ -231,7 +249,8 @@
                 <div class="slider-group">
                     <div class="slider-header">
                         <span class="label-b">Blue</span>
-                        <span class="val-text" id="val-b">128</span>
+                        <!-- <span class="val-text" id="val-b">128</span> -->
+                        <input type="number" name="val-b" id="val-b" class="val-text" value="128" min="0" max="255">
                     </div>
                     <input name="b" type="range" id="slider-b" min="0" max="255" value="128">
                 </div>
@@ -243,11 +262,9 @@
         </form>
 
         <div class="progress-container">
-            <div class="progress-segment active"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
+            <div class="progress-segment" th:each="i : ${#numbers.sequence(0,4)}"
+                    th:classappend="${i<=roundIndex} ? 'active' : ''">
+            </div>
         </div>
 
     </div>
@@ -263,21 +280,38 @@
 
         const guessBox = document.getElementById('guess-box');
 
-        function updateColor() {
+        function updateSliderTextColor() {
             const r = sliderR.value;
             const g = sliderG.value;
             const b = sliderB.value;
 
-            valR.textContent = r;
-            valG.textContent = g;
-            valB.textContent = b;
+            valR.value = r;
+            valG.value = g;
+            valB.value = b;
 
             guessBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         }
 
-        sliderR.addEventListener('input', updateColor);
-        sliderG.addEventListener('input', updateColor);
-        sliderB.addEventListener('input', updateColor);
+        sliderR.addEventListener('input', updateSliderTextColor);
+        sliderG.addEventListener('input', updateSliderTextColor);
+        sliderB.addEventListener('input', updateSliderTextColor);
+
+        function updateTextSliderColor() {
+            const r = valR.value;
+            const g = valG.value;
+            const b = valB.value;
+
+            sliderR.value = r;
+            sliderG.value = g;
+            sliderB.value = b;
+
+            guessBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        valR.addEventListener('input', updateTextSliderColor);
+        valG.addEventListener('input', updateTextSliderColor);
+        valB.addEventListener('input', updateTextSliderColor);
+
     </script>
 </body>
 </html>

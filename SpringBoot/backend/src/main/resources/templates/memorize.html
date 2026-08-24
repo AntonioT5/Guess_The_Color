@@ -102,11 +102,9 @@
         </div>
 
         <div class="progress-container">
-            <div class="progress-segment active"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
+            <div class="progress-segment" th:each="i : ${#numbers.sequence(0,4)}"
+                    th:classappend="${i<=roundIndex} ? 'active' : ''">
+            </div>
         </div>
     </div>
 

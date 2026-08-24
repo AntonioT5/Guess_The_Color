@@ -78,6 +78,12 @@ public class PracticeController {
         Practice practice = (Practice) session.getAttribute("practice");
         Practice completed = practiceService.completeSession(practice);
         model.addAttribute("practice", completed);
+        double max = completed.getPracticeRounds().stream().mapToDouble(r->r.getScore()).max().orElse(0);
+        double avg = completed.getPracticeRounds().stream().mapToDouble(r->r.getScore()).average().orElse(0);
+
+        model.addAttribute("max", max);
+        model.addAttribute("avg", avg);
+
         return "final";
     }
 }

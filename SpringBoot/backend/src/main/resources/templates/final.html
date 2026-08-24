@@ -169,12 +169,12 @@
 
             <div class="stats-container">
                 <div class="stat-card">
-                    <div class="stat-num" th:text="${#numbers.formatDecimal(practice.practiceRounds.stream().mapToDouble(r->r.score).max().orElse(0), 1, 2)}"></div>
-                    <div class="stat-label">Best Round</div>
+                    <div class="stat-num" th:text="${#numbers.formatDecimal(max, 1, 2)}"></div>
+                    <div class="stat-label">Best<br> Round</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-num" th:text="${#numbers.formatDecimal(practice.totalScore/practice.practiceRounds.size(), 1, 2)}"></div>
-                    <div class="stat-label">Avg Score</div>
+                    <div class="stat-num" th:text="${#numbers.formatDecimal(avg, 1, 2)}"></div>
+                    <div class="stat-label">Average Score</div>
                 </div>
             </div>
         </div>
@@ -191,10 +191,10 @@
         </div>
     </div>
 
-    <div>
+    <form method="get" th:action="@{/home}">
         <button class="submit-btn">
             Go Back Home
         </button>
-    </div>
+    </form>
 </body>
 </html>
