@@ -166,14 +166,15 @@
           <h3 th:text="|Practice ${i.index+1}|"></h3>
           <div>
             <div class="round-history" th:each="round : ${practice.practiceRounds}">
-                <div class="color-round"
-                    th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">
-                </div>
-                /
-                <div class="color-round"
-                    th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|">
-                </div>
-            </div>
+              <div class="color-round"
+                  th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">
+              </div>
+              /
+              <div class="color-round"
+                  th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|">
+              </div>
+          </div>
+          </div>
         </div>
     </div>
 

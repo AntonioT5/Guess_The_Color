@@ -24,7 +24,7 @@ public class HistoryController {
     @GetMapping()
     public String getMethodName(@AuthenticationPrincipal User user, Model model) {
 
-        List<Practice> practices = practiceService.findAllPracticesByUser(user);
+        List<Practice> practices = practiceService.findAllPracticesByUser(user).stream().filter(p->p.getPracticeRounds().size()==5).toList();
 
         model.addAttribute("practices", practices);
         
