@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f4f6f8;
+        color: #333333;
+      }
+      .page-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .dashboard-container {
+        width: 100%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        padding: 24px;
+      }
+
+      .profile-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5%;
+      }
+
+      .profile-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .user-details h2 {
+        margin: 0 0 4px 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .user-details p {
+        margin: 0 0 8px 0;
+        font-size: 14px;
+        color: #6c757d;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        border: 1px solid #ced4da;
+        background-color: white;
+        padding: 8px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #495057;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .btn:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+        color: #212529;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+      }
+
+      .history-part{
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+        max-width: 800px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        padding: 24px;
+      }
+
+      .history-part h3{
+        margin: 0 0;
+        font-size: 18px;
+        font-weight: 550;
+      }
+
+      .history-part div{
+        display: flex;
+        gap: 10px;
+      }
+
+      .round-history{
+        width: 50px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        border: 1px solid #dbe1e6;
+        background-color: white;
+        padding: 8px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #495057;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .round-history:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+        color: #212529;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      }
+
+      .color-round{
+        width: 15px;
+        height: 15px;
+        background-color: #e5e7eb;
+      }
+
+    </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <div class="dashboard-container">
+      <div class="card profile-section">
+        <div class="profile-info">
+          <div class="user-details">
+            <h2>Your history</h2>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <a href="/home" style="text-decoration:none;text-align:center;" class="btn">Go Back</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="history-part" th:each="practice, i : ${practices}">
+          <h3 th:text="|Practice ${i.index+1}|"></h3>
+          <div>
+            <div class="round-history" th:each="round : ${practice.practiceRounds}">
+                <div class="color-round"
+                    th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">
+                </div>
+                /
+                <div class="color-round"
+                    th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|">
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -15,27 +15,20 @@ import lombok.AllArgsConstructor;
 
 
 @Controller
-@RequestMapping("/home")
 @AllArgsConstructor
-public class HomeController {
+@RequestMapping("/history")
+public class HistoryController {
     
     private final PracticeService practiceService;
 
     @GetMapping()
-    public String getDashboard(Model model, @AuthenticationPrincipal User user) {
-
-        model.addAttribute("username", user.getUsername());
+    public String getMethodName(@AuthenticationPrincipal User user, Model model) {
 
         List<Practice> practices = practiceService.findAllPracticesByUser(user);
-        double bestScore = practices.stream().mapToDouble(p->p.getTotalScore()).max().orElse(0);
-        double avgScore = practices.stream().mapToDouble(p->p.getTotalScore()).average().orElse(0);
 
-        model.addAttribute("bestScore", bestScore);
-        model.addAttribute("avgScore", avgScore);
-
-        return "homePage";
+        model.addAttribute("practices", practices);
+        
+        return "history";
     }
-
-    
     
 }

@@ -1,6 +1,7 @@
 package guessthecolor.backend.Service.Impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,11 @@ public class PracticeServiceImpl implements PracticeService {
         double total = practice.getPracticeRounds().stream().mapToInt(r-> Math.round((float) r.getScore())).sum();
         practice.setTotalScore(total);
         return practiceRepository.save(practice);
+    }
+
+    @Override
+    public List<Practice> findAllPracticesByUser(User user) {
+        return practiceRepository.findByUserOrderByCreatedAtDesc(user);
     }
     
 }
