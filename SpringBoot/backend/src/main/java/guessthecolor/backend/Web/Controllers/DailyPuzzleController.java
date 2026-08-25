@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import guessthecolor.backend.Domain.DailyAttemptRound;
 import guessthecolor.backend.Domain.DailyPuzzle;
 import guessthecolor.backend.Domain.DailyPuzzleAttempt;
-import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Domain.Record.Color;
+import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Service.ColorService;
 import guessthecolor.backend.Service.DailyPuzzleAttemptService;
 import guessthecolor.backend.Service.DailyPuzzleService;
@@ -57,7 +61,7 @@ public class DailyPuzzleController {
         model.addAttribute("targetR", target.r());
         model.addAttribute("targetG", target.g());
         model.addAttribute("targetB", target.b());
-        return "memorize";
+        return "memorizeDaily";
     }
 
     @GetMapping("/play/{roundIndex}/guess")
@@ -68,7 +72,7 @@ public class DailyPuzzleController {
         if (attempt == null || roundIndex < 0 || roundIndex >= 5) {
             return "redirect:/home";
         }
-        return "guess";
+        return "guessDaily";
     }
 
     @PostMapping("/rounds")
@@ -98,7 +102,7 @@ public class DailyPuzzleController {
         model.addAttribute("roundIndex", roundIndex);
         model.addAttribute("round", round);
         model.addAttribute("isLastRound", roundIndex == 4);
-        return "result";
+        return "resultDaily";
     }
     
     @GetMapping("/final")
@@ -109,7 +113,7 @@ public class DailyPuzzleController {
         }
 
         DailyPuzzleAttempt completed = attemptService.completeAttempt(attempt);
-        model.addAttribute("practice", completed);
+        model.addAttribute("daily", completed);
 
         double max = completed.getDailyAttemptRounds().stream().mapToDouble(r->r.getScore()).max().orElse(0);
         double avg = completed.getDailyAttemptRounds().stream().mapToDouble(r->r.getScore()).average().orElse(0);
@@ -119,7 +123,7 @@ public class DailyPuzzleController {
 
         session.removeAttribute("dailyAttempt");
 
-        return "final";
+        return "finalDaily";
     }
 
     @GetMapping("/leaderboard")

@@ -74,5 +74,10 @@ public class DailyPuzzleAttemptServiceImpl implements DailyPuzzleAttemptService{
     public List<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle) {
         return attemptRepository.findByDailyPuzzleOrderByTotalScoreDesc(puzzle);
     }
+
+    @Override
+    public boolean userAndPuzzleExists(User user, DailyPuzzle puzzle) {
+        return attemptRepository.existsByUserAndDailyPuzzle(user, puzzle);
+    }
     
 }

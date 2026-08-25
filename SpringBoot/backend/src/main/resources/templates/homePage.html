@@ -174,6 +174,11 @@
         .mode-link:hover {
             text-decoration: underline;
         }
+
+        .mode-card-dark {
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
     </style>
 </head>
 <body>
@@ -217,12 +222,20 @@
                     <button type="submit" class="mode-link link-purple" style="background:none;border:none;padding:0;cursor:pointer;">Play now</button>
                 </form>
             </div>
-
-            <div class="card mode-card">
+            
+            <div th:if="${!exists}" class="card mode-card">
                 <h3 class="mode-title">Daily Puzzle</h3>
                 <p class="mode-desc">One shot - Compete globally</p>
                 <form th:action="@{/daily/start}" method="post" style="margin:0;">
                     <button type="submit" class="mode-link link-pink" style="background:none;border:none;padding:0;cursor:pointer;">Play now</button>
+                </form>
+            </div>
+
+            <div th:if="${exists}" class="card mode-card mode-card-dark">
+                <h3 class="mode-title">Daily Puzzle</h3>
+                <p class="mode-desc">You have finished your puzzle for today</p>
+                <form th:action="@{/daily/leaderboard}" method="post" style="margin:0;">
+                    <button type="submit" class="mode-link link-pink" style="background:none;border:none;padding:0;cursor:pointer;">See Leaderboard</button>
                 </form>
             </div>
 

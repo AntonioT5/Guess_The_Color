@@ -49,7 +49,7 @@ public class PracticeController {
         model.addAttribute("targetR", target.r());
         model.addAttribute("targetG", target.g());
         model.addAttribute("targetB", target.b());
-        return "memorize";
+        return "memorizePractice";
     }
 
     @GetMapping("/play/{roundIndex}/guess")

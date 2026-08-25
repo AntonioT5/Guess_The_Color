@@ -13,6 +13,7 @@ public interface DailyPuzzleAttemptService {
     DailyPuzzleAttempt startAttempt(User user, DailyPuzzle puzzle);
     DailyAttemptRound submitRound(DailyPuzzleAttempt attempt, int roundIndex, Color guess);
     DailyPuzzleAttempt completeAttempt(DailyPuzzleAttempt attempt);
+    boolean userAndPuzzleExists(User user, DailyPuzzle puzzle);
     
     List<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle);
 }
