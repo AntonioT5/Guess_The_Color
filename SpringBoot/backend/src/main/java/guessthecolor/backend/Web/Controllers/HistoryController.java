@@ -9,11 +9,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import guessthecolor.backend.Domain.Practice;
+import guessthecolor.backend.Domain.PracticeRound;
 import guessthecolor.backend.Domain.User;
+import guessthecolor.backend.Service.PracticeRoundService;
 import guessthecolor.backend.Service.PracticeService;
 import lombok.AllArgsConstructor;
 
@@ -24,6 +27,7 @@ import lombok.AllArgsConstructor;
 public class HistoryController {
     
     private final PracticeService practiceService;
+    private final PracticeRoundService practiceRoundService;
 
     @GetMapping()
     public String getMethodName(@AuthenticationPrincipal User user, Model model, @RequestParam(defaultValue = "0") int page) {
@@ -42,4 +46,13 @@ public class HistoryController {
         return "history";
     }
     
+    @GetMapping("/round-details/{id}")
+    public String getRoundDetails(@PathVariable Long id, @AuthenticationPrincipal User user, Model model) {
+
+        PracticeRound round = practiceRoundService.findById(id);
+
+        model.addAttribute("round", round);
+
+        return "historyDetails";
+    }
 }

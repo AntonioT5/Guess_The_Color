@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f4f6f8;
+        color: #333333;
+      }
+      .page-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .details_card {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        height: 450px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        padding: 24px;
+      }
+
+      .color_part{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      .color_part div{
+        width: 150px;
+        height: 150px;
+        background-color: black;
+        border-radius: 14px;
+      }
+
+      .text_area h3{
+        text-align: center;
+        font-weight: 700;
+        font-size: 24px;
+      }
+
+      .score-container {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .score-number {
+        text-align: center;
+        font-size: 72px;
+        font-weight: 800;
+        color: #0d6efd;
+        line-height: 1;
+        margin-bottom: 5px;
+      }
+
+      .submit-btn {
+        margin-top: 50px;
+        width: 100%;
+        height: 50px;
+        background-color: #0d6efd;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .submit-btn:hover {
+        color: #e5e7eb;
+        background-color: #0b5ed7;
+      }
+    </style>
+</head>
+<body>
+  <div class="page-wrapper">
+      <div class="details_card">
+        <div class="color_part">
+            <div th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|"></div>
+            <div th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|"></div>
+        </div>
+        <div class="text_area">
+            <h3>Round Score</h3>
+        </div>
+        
+        <div class="score-number" th:text="${#numbers.formatDecimal(round.score, 1, 2)}" th:style="|color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">0</div>
+
+        <a th:href="@{/history}" class="submit-btn">
+            Go back
+        </a>
+      </div>
+  </div>
+</body>
+</html>

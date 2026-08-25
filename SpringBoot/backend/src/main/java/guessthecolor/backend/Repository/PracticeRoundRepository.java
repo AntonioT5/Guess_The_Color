@@ -7,5 +7,5 @@ import guessthecolor.backend.Domain.PracticeRound;
 
 @Repository
 public interface PracticeRoundRepository extends JpaRepository<PracticeRound, Long>{
-    
+
 }

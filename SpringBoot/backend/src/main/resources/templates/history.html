@@ -124,6 +124,7 @@
         height: 25px;
         display: flex;
         align-items: center;
+        justify-content: center;
         flex-direction: row;
         border: 1px solid #dbe1e6;
         background-color: white;
@@ -134,6 +135,7 @@
         font-size: 14px;
         font-weight: 500;
         transition: all 0.2s ease;
+        text-decoration: none;
       }
 
       .round-history:hover {
@@ -144,6 +146,7 @@
       }
 
       .color-round{
+        margin: 5px;
         width: 15px;
         height: 15px;
         background-color: #e5e7eb;
@@ -171,15 +174,15 @@
         <div class="history-part" th:each="practice, i : ${practices}">
           <h3 th:text="|Practice ${currentPage * 5 + i.index+1}|"></h3>
           <div>
-            <div class="round-history" th:each="round : ${practice.practiceRounds}">
-              <div class="color-round"
-                  th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">
-              </div>
-              /
-              <div class="color-round"
-                  th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|">
-              </div>
-          </div>
+              <a th:href="@{/history/round-details/{id}(id=${round.id})}" class="round-history" th:each="round : ${practice.practiceRounds}">
+                <div class="color-round"
+                    th:style="|background-color: rgb(${round.targetR}, ${round.targetG}, ${round.targetB});|">
+                </div>
+                /
+                <div class="color-round"
+                    th:style="|background-color: rgb(${round.guessR}, ${round.guessG}, ${round.guessB});|">
+                </div>
+              </a>
           </div>
         </div>
     </div>
