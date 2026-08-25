@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import guessthecolor.backend.Domain.Enums.Role;
 import guessthecolor.backend.Domain.Exception.AddAllFieldsException;
+import guessthecolor.backend.Domain.Exception.InvalidArgumentsException;
 import guessthecolor.backend.Domain.Exception.PasswordsDoNotMatchException;
 import guessthecolor.backend.Domain.Exception.UserAlreadyExistsException;
 import guessthecolor.backend.Domain.Exception.UserNotFoundException;

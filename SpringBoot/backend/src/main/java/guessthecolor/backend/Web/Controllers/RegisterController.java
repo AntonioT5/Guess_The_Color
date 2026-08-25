@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import guessthecolor.backend.Service.Impl.InvalidArgumentsException;
+import guessthecolor.backend.Domain.Exception.InvalidArgumentsException;
 import guessthecolor.backend.Service.UserService;
 import lombok.AllArgsConstructor;
 

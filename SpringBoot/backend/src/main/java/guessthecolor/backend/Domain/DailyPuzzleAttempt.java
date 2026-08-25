@@ -1,5 +1,6 @@
 package guessthecolor.backend.Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,5 +40,5 @@ public class DailyPuzzleAttempt {
     private User user;
 
     @OneToMany(mappedBy="dailyPuzzleAttempt")
-    private List<DailyAttemptRound> dailyAttemptRounds;
+    private List<DailyAttemptRound> dailyAttemptRounds = new ArrayList<>();;
 }

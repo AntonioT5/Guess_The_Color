@@ -27,4 +27,8 @@ public class DailyPuzzle {
 
     @OneToMany(mappedBy="dailyPuzzle")
     private List<DailyPuzzleAttempt> dailyPuzzleAttempts;
+
+    public long getSeed() {
+        return this.seed;
+    }
 }

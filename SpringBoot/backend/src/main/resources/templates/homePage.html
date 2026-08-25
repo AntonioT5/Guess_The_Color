@@ -162,7 +162,7 @@
         .mode-link {
             text-decoration: none;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -214,14 +214,16 @@
                 <h3 class="mode-title">Practice</h3>
                 <p class="mode-desc">5 rounds - 3s memory - RGB sliders</p>
                 <form th:action="@{/practice/start}" method="post" style="margin:0;">
-                    <button type="submit" class="mode-link link-purple" style="background:none;border:none;padding:0;cursor:pointer;font:inherit;">Play now</button>
+                    <button type="submit" class="mode-link link-purple" style="background:none;border:none;padding:0;cursor:pointer;">Play now</button>
                 </form>
             </div>
 
             <div class="card mode-card">
                 <h3 class="mode-title">Daily Puzzle</h3>
                 <p class="mode-desc">One shot - Compete globally</p>
-                <a href="#" class="mode-link link-pink">Play today's</a>
+                <form th:action="@{/daily/start}" method="post" style="margin:0;">
+                    <button type="submit" class="mode-link link-pink" style="background:none;border:none;padding:0;cursor:pointer;">Play now</button>
+                </form>
             </div>
 
         </div>

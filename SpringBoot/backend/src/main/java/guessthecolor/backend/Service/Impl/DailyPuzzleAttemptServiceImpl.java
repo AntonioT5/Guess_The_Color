@@ -45,6 +45,7 @@ public class DailyPuzzleAttemptServiceImpl implements DailyPuzzleAttemptService{
         double score = colorService.calculateScore(deltaE);
 
         DailyAttemptRound round = new DailyAttemptRound();
+        attempt.getDailyAttemptRounds().add(round); 
         round.setDailyPuzzleAttempt(attempt);
         round.setRoundIndex(roundIndex);
         round.setTargetR(target.r());
