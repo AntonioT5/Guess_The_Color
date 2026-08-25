@@ -3,6 +3,8 @@ package guessthecolor.backend.Service.Impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import guessthecolor.backend.Domain.Practice;
@@ -61,7 +63,13 @@ public class PracticeServiceImpl implements PracticeService {
     public Practice completeSession(Practice practice) {
         double total = practice.getPracticeRounds().stream().mapToInt(r-> Math.round((float) r.getScore())).sum();
         practice.setTotalScore(total);
+        practice.setComplited(true);
         return practiceRepository.save(practice);
+    }
+
+    @Override
+    public Page<Practice> findPracticesByUser(User user, Pageable pageable) {
+        return practiceRepository.findByUserAndComplitedTrueOrderByCreatedAtDesc(user, pageable);
     }
 
     @Override

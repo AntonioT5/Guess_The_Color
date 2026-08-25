@@ -2,6 +2,9 @@ package guessthecolor.backend.Service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import guessthecolor.backend.Domain.Practice;
 import guessthecolor.backend.Domain.PracticeRound;
 import guessthecolor.backend.Domain.Record.Color;
@@ -12,5 +15,6 @@ public interface PracticeService {
     Practice startSession(User user);
     PracticeRound submitRound(Practice practice, int roundIndex, Color guess);
     Practice completeSession(Practice practice);
+    Page<Practice> findPracticesByUser(User user, Pageable pageable);
     List<Practice> findAllPracticesByUser(User user);
 }
