@@ -234,7 +234,7 @@
             <div th:if="${exists}" class="card mode-card mode-card-dark">
                 <h3 class="mode-title">Daily Puzzle</h3>
                 <p class="mode-desc">You have finished your puzzle for today</p>
-                <form th:action="@{/daily/leaderboard}" method="post" style="margin:0;">
+                <form th:action="@{/daily/leaderboard}" method="get" style="margin:0;">
                     <button type="submit" class="mode-link link-pink" style="background:none;border:none;padding:0;cursor:pointer;">See Leaderboard</button>
                 </form>
             </div>

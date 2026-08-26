@@ -1,6 +1,6 @@
 package guessthecolor.backend.Service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import guessthecolor.backend.Domain.DailyAttemptRound;
 import guessthecolor.backend.Domain.DailyPuzzle;
@@ -15,5 +15,5 @@ public interface DailyPuzzleAttemptService {
     DailyPuzzleAttempt completeAttempt(DailyPuzzleAttempt attempt);
     boolean userAndPuzzleExists(User user, DailyPuzzle puzzle);
     
-    List<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle);
+    Page<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle, int page, int size);
 }
