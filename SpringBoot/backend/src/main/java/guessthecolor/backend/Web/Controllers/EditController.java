@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+
 
 
 @Controller
@@ -42,7 +46,7 @@ public class EditController {
                                 Model model
     ) {
         try {
-            userService.editData(oldUsername, oldMail, username, mail);
+            userService.editData(currentUser.getUsername(), currentUser.getMail(), username, mail);
 
             UserDetails updatedUser = userService.loadUserByMail(mail);
 
@@ -62,6 +66,17 @@ public class EditController {
             return "editProfile";
         }
 
+    }
+    
+    @PostMapping("/delete")
+    public String deleteUser(@AuthenticationPrincipal User user, HttpServletRequest request, HttpServletResponse response) {
+        
+        userService.deleteUser(user);
+
+        new SecurityContextLogoutHandler().logout(request, response,
+            SecurityContextHolder.getContext().getAuthentication());
+
+        return "redirect:/login";
     }
     
     

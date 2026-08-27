@@ -108,6 +108,7 @@
     }
 
     .submit-btn {
+      flex: 1;
       width: 100%;
       height: 50px;
       background-color: #0d6efd;
@@ -119,9 +120,11 @@
       cursor: pointer;
       display: flex;
       justify-content: center;
+      padding: 0;
       align-items: center;
       transition: background-color 0.2s ease;
       margin-top: 10px;
+      text-decoration: none;
     }
 
     .submit-btn:hover {
@@ -135,6 +138,81 @@
       text-align: center;
       margin-top: 5px;
       font-weight: 500;
+    }
+
+    .delete-btn{
+      background-color: #e11d48;
+    }
+
+    #openModalBtn:hover{
+      background-color: #cc1a40;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-box {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+      color: #1a1a1a;
+      font-size: 22px;
+    }
+
+    .modal-box p {
+      color: #6c757d;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .modal-actions .submit-btn {
+      margin-top: 0; 
+    }
+    
+    .cancel-btn {
+      background-color: #e5e7eb;
+      color: #333333;
+    }
+
+    .cancel-btn:hover {
+      background-color: #d1d5db;
+    }
+
+    .delete-btn:hover{
+      background-color: #cc1a40;
     }
 
   </style>
@@ -165,11 +243,50 @@
         <label>Mail</label>
         <input type="text" name="mail" th:value="${mail}">
       </div>
-      <button class="submit-btn">Save Changes</button>
+      <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+        <button class="submit-btn">Save Changes</button>
+        <button type="button" id="openModalBtn" class="submit-btn delete-btn">Delete Account</button>
+      </div>
     </form>
 
     <div class="error-alert" th:if="${error!=null}" th:text="${error}"></div>
   </div>
 </div>
+
+<div id="deleteModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>Delete Account?</h2>
+    <p>Are you sure you want to delete your account? All of your data will be permenently removed. This action cannot be undone.</p>
+
+    <div class="modal-actions">
+      <button type="button" id="closeModalBtn" class="submit-btn cancel-btn">No, Keep It</button>
+
+      <form th:action="@{/edit/delete}" method="post" style="flex: 1; margin: 0;">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button type="submit" class="submit-btn delete-btn">Yes, Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("deleteModal");
+  const openBTN = document.getElementById("openModalBtn");
+  const closeBTN = document.getElementById("closeModalBtn");
+
+  openBTN.addEventListener('click', function(){
+    modal.style.display = 'flex';
+  })
+
+  closeBTN.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', function(event){
+    if(event.target === modal){
+      modal.style.display = 'none';
+    }
+  })
+</script>
 </body>
 </html>

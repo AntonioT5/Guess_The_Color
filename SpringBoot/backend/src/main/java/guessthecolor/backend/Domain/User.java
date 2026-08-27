@@ -48,10 +48,11 @@ public class User implements UserDetails{
     @OneToOne(mappedBy="user")
     private Stats stats;
 
+    private Date deletedAt = null;
+
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -86,7 +87,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return deletedAt == null;
     }
 
     @Override
