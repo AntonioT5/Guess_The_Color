@@ -14,6 +14,7 @@ public interface DailyPuzzleAttemptService {
     DailyAttemptRound submitRound(DailyPuzzleAttempt attempt, int roundIndex, Color guess);
     DailyPuzzleAttempt completeAttempt(DailyPuzzleAttempt attempt);
     boolean userAndPuzzleExists(User user, DailyPuzzle puzzle);
+    DailyPuzzleAttempt findByUserAndPuzzle(User user, DailyPuzzle puzzle);
     
     Page<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle, int page, int size);
 }

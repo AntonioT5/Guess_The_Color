@@ -189,7 +189,8 @@
             <div class="profile-info">
                 <div class="user-details">
                     <h2 th:text="${username}"></h2>
-                    <p>Ready to hit today's puzzle</p>
+                    <p th:if="${!exists}">Ready to hit today's puzzle</p>
+                    <p th:if="${exists}">Your score for today's puzzle is: <span th:text="${puzzleScore}"></span></p>
                 </div>
             </div>
             <div class="action-buttons">

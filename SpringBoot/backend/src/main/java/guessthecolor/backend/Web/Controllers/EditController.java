@@ -1,5 +1,6 @@
 package guessthecolor.backend.Web.Controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +21,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping("/edit")
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()")
 public class EditController {
 
     private final UserService userService;

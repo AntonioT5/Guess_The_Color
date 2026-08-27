@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/history")
+@PreAuthorize("isAuthenticated()")
 public class HistoryController {
     
     private final PracticeService practiceService;
@@ -50,10 +52,6 @@ public class HistoryController {
     public String getRoundDetails(@PathVariable Long id, @AuthenticationPrincipal User user, Model model) {
 
         PracticeRound round = practiceRoundService.findById(id);
-
-        if (!round.getPractice().getUser().getId().equals(user.getId())) {
-            throw new AccessDeniedException("Not your round");
-        }
 
         model.addAttribute("round", round);
 

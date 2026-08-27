@@ -1,6 +1,7 @@
 package guessthecolor.backend.Web.Controllers;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/daily")
+@PreAuthorize("isAuthenticated()")
 public class DailyPuzzleController {
     
     private final DailyPuzzleService dailyPuzzleService;

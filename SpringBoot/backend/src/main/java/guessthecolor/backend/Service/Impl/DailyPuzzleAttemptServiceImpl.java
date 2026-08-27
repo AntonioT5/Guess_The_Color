@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import guessthecolor.backend.Domain.DailyAttemptRound;
 import guessthecolor.backend.Domain.DailyPuzzle;
 import guessthecolor.backend.Domain.DailyPuzzleAttempt;
+import guessthecolor.backend.Domain.Exception.UsernameNotFoundException;
 import guessthecolor.backend.Domain.Record.Color;
 import guessthecolor.backend.Domain.User;
 import guessthecolor.backend.Repository.DailyAttemptRoundRepository;
@@ -82,6 +83,11 @@ public class DailyPuzzleAttemptServiceImpl implements DailyPuzzleAttemptService{
     @Override
     public boolean userAndPuzzleExists(User user, DailyPuzzle puzzle) {
         return attemptRepository.existsByUserAndDailyPuzzle(user, puzzle);
+    }
+
+    @Override
+    public DailyPuzzleAttempt findByUserAndPuzzle(User user, DailyPuzzle puzzle) {
+        return attemptRepository.findByUserAndDailyPuzzle(user, puzzle).orElseThrow(()->new UsernameNotFoundException(user.getUsername()));
     }
     
 }

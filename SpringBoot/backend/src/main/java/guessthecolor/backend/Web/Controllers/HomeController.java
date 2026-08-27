@@ -2,6 +2,7 @@ package guessthecolor.backend.Web.Controllers;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping("/home")
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()")
 public class HomeController {
     
     private final PracticeService practiceService;
@@ -40,6 +42,12 @@ public class HomeController {
         model.addAttribute("exists", dailyPuzzleAttemotService.userAndPuzzleExists(user, puzzle));
         model.addAttribute("bestScore", bestScore);
         model.addAttribute("avgScore", avgScore);
+        try{
+            model.addAttribute("puzzleScore", dailyPuzzleAttemotService.findByUserAndPuzzle(user, puzzle).getTotalScore());
+        }
+        catch(RuntimeException e){
+            model.addAttribute("puzzleScore", " data loading error");
+        }
 
         return "homePage";
     }

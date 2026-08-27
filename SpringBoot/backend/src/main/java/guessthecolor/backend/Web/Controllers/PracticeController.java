@@ -1,5 +1,6 @@
 package guessthecolor.backend.Web.Controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping("/practice")
 @AllArgsConstructor
+@PreAuthorize("isAuthenticated()")
 public class PracticeController {
     
     private final PracticeService practiceService;
