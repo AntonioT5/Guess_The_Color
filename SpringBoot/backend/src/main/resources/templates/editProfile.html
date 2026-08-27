@@ -243,9 +243,12 @@
         <label>Mail</label>
         <input type="text" name="mail" th:value="${mail}">
       </div>
-      <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+      <div sec:authorize="hasRole('USER')" style="display: flex; gap: 20px; justify-content: center; align-items: center;">
         <button class="submit-btn">Save Changes</button>
         <button type="button" id="openModalBtn" class="submit-btn delete-btn">Delete Account</button>
+      </div>
+      <div sec:authorize="hasRole('ADMIN')" style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+        <button class="submit-btn">Save Changes</button>
       </div>
     </form>
 
@@ -274,9 +277,11 @@
   const openBTN = document.getElementById("openModalBtn");
   const closeBTN = document.getElementById("closeModalBtn");
 
-  openBTN.addEventListener('click', function(){
+  if(openBTN){
+    openBTN.addEventListener('click', function(){
     modal.style.display = 'flex';
   })
+  }
 
   closeBTN.addEventListener('click', function() {
     modal.style.display = 'none';
