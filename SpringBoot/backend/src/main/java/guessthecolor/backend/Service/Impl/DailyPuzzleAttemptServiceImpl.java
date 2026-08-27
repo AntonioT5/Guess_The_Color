@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import guessthecolor.backend.Domain.DailyAttemptRound;
@@ -76,7 +75,7 @@ public class DailyPuzzleAttemptServiceImpl implements DailyPuzzleAttemptService{
 
     @Override
     public Page<DailyPuzzleAttempt> getLeaderboard(DailyPuzzle puzzle, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "totalScore"));
+        Pageable pageable = PageRequest.of(page, size);
         return attemptRepository.findByDailyPuzzleOrderByTotalScoreDesc(puzzle, pageable);
     }
 

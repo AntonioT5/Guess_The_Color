@@ -226,6 +226,7 @@
         </div>
 
         <form th:action="@{/practice/rounds}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="sliders-container">
                 <input type="hidden" name="roundIndex" th:value="${roundIndex}">
 

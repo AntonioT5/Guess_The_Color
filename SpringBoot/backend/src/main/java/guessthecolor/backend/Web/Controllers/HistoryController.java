@@ -51,6 +51,10 @@ public class HistoryController {
 
         PracticeRound round = practiceRoundService.findById(id);
 
+        if (!round.getPractice().getUser().getId().equals(user.getId())) {
+            throw new AccessDeniedException("Not your round");
+        }
+
         model.addAttribute("round", round);
 
         return "historyDetails";

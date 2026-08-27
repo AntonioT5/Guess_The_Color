@@ -55,8 +55,8 @@ public class EditController {
             return "redirect:/home";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            model.addAttribute("username", oldUsername);
-            model.addAttribute("mail", oldMail);
+            model.addAttribute("username", currentUser.getUsername());
+            model.addAttribute("mail", currentUser.getMail());
             return "editProfile";
         }
 
